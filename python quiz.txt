@@ -36,9 +36,9 @@ print(int(my_number))
 what will be the output:
 1. 12
 2. 12.0
-3. ValueError
+3. ValueErro
 4. TypeError
-ANs : 3
+ANs : 1
 ====================
 what function to use to convert a number into a string
 
