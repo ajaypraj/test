@@ -94,7 +94,7 @@ What will be the output of print(an):
 3. None
 4. None of the above
 
-ANS: 3
+ANS: 1
 ===========================
 >>> name=["v","a","s","j"]
 >>> print(name.sort())
@@ -104,7 +104,7 @@ What will be output of above print statement
 3. None
 4. None of the above
 
-ANS : 3
+ANS : 2
 ===========================
 
 What method is used to convert string into list
