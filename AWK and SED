@@ -4,6 +4,28 @@ ONE one
 ONE
 ONE
 
+replace last occurance of one with ONE on line number 2
+sed '2 s/\(.*\)one/\1ONE/' t
+one one one one
+one  one ONE
+one one
+one
+
+echo "The  value of  mango is 100 and for hapus it is 200" | sed 's/\(.*\)[0-9][0-9][0-9])*/\1400/' 
+The  value of  mango is 100 and for hapus it is 400
+
+echo "The  value of  mango is 1 and for hapus it is 2" | sed 's/\(.*\)[0-9])*/\14/' 
+The  value of  mango is 1 and for hapus it is 4
+
+
+replcae "swp-RedHat-Linux-OS-5.5.0.0-03" with "swp-RedHat-Linux-OS-5.5.0.0 03"
+
+1) echo "vijay-bha-lekar-0.0" | rev | sed 's/-/ /' | rev
+vijay-bha-lekar 0.0
+2) echo "vijay-bha-lekar-0.0" | sed 's/\(.*\)-/\1 /'
+vijay-bha-lekar 0.0
+
+
 VIJAY@VIJAYHOME MINGW32 ~ (master)
 $ sed s/one/ONE/g t
 ONE ONE ONE
@@ -62,7 +84,40 @@ $ sed ‘1d’ Sed_File.txt
 sed command to delete last line
 $ sed ‘$d’ Sed_File.txt
 
+view line number 1,2 and 5,6 
+sed -n -e '1,2p' -e '5,6p' t
+one one one one
+one
+two 
+one
+
+convert windows  file to unix file format without using dos2unix utiltity
+
+sed -i 's/\r//g' filename.txt
+
+switching pair of words
+~/vij$ cat n
+vijay,bhalekar
+ajay,bhalekar
+
+~/vij$ sed 's/^\(.*\),\(.*\)$/\2,\1/g' n
+bhalekar,vijay
+bhalekar,ajay
+
+replace content only if particular pattern is matched
+~/vij$ cat t
+we need to start partying at work, 
+but let's remember to start all services first
+
+~/vij$ sed 's/start/stop/g' t
+we need to stop partying at work, 
+but let's remember to stop all services first
+
+~/vij$ sed '/services/ s/start/stop/g' t
+we need to start partying at work, 
+but let's remember to stop all services first
 ===============
+
 AWK 
 
 NR: NR command keeps a current count of the number of input records. Remember that records are usually lines. Awk command performs the pattern/action statements once for each record in a file.
@@ -360,6 +415,5 @@ cut -d" " -f 2 filename // for displaying 2nd column seperated by space
 print lines starting with "vi"  :  awk '/^vi/{print}' filename
 print lines endng with "kar:  awk '/kar$/{print}' filename    ( cat h | grep "re$")
 print lines containing 0 to 9 numbers :  awk '/[0-9]/{print}' filename
-
 
 
