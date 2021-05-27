@@ -193,6 +193,15 @@ find . -type f -atime 10
 find all files which are modified in last 10 to 100 days (files which are modified in last 9 days should be excluded)
 find . -type f -mtime +10 -mtime -100
 
+find all files modified in last 10th minute
+find . -type f -mmin 10
+
+find all files modifies in last 10 minutes
+find . -type f -mmin -10
+
+find all files modified in past but not in last 10 minutes
+find . -type  f -mmin +10
+
 for minutes we use word mmin amin cmin
 find all files whose size is 50MB
 find . -type f -size 50M
@@ -212,6 +221,8 @@ find . -type f -name "abc.txt"  | xargs ls -l {} \;
 while finding if you want to search the file only upto 2 directories 
 find . -maxdepth 2 -name abc.txt
 
+Top command 
+https://www.howtogeek.com/668986/how-to-use-the-linux-top-command-and-understand-its-output/
 
 Grep :
 variants of grep 
