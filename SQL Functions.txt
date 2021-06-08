@@ -141,7 +141,7 @@ SUM(salary)
 
 
 2. Scalar Functions
-Scalar functions return a single value from an input value
+Scalar functions return a Group of value from an input value
 
 1)UCASE() Function
 UCASE function is used to convert value of string column to Uppercase characters.
