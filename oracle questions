@@ -368,7 +368,7 @@ joins : it is used to select columns from 2 or mote tables based on logical rela
 
 40) what is difference between union and union all operator ?
 union set operator return all distinct rows from selected queries means duplicate rows are removed
-union all set operator removed duplicate rows from queries
+Union all will not eliminate duplicate rows
 
 41) which is faster betwen union and union all ?
 
