@@ -23,6 +23,11 @@ df -hk  (for example /dev/sda1)
 
 lsof -i:8080  // which process is using port 8080
 
+netstat -anp | grep httpd  // for checking httpd is running on which port
+tcp6       0      0 :::80                   :::*                    LISTEN      9461/httpd
+unix  3      [ ]         STREAM     CONNECTED     188023   9461/httpd
+
+
 how to redirect error and output to logfile 
 
 
