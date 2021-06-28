@@ -8,6 +8,8 @@ Sticky BIT
 https://www.thegeekstuff.com/2013/02/sticky-bit/
 linuxnix.com/sticky-bit-set-linux/
 
+https://www.slashroot.in/suid-and-sgid-linux-explained-examples  // sticky bit , SUID and SGID
+
 
 mtime : ls -l : show the last update to file content, it does not udpate with change in permission or owner
 atime : ls -lu : shows the last file accessed time 
@@ -33,12 +35,7 @@ how to redirect error and output to logfile
 
 bash file.txt 2> logfile.txt
 2 for error
-
-Top command parameter in detail
-
-
 ==============
-
 
 date -s "27 AUGUST 2018 15:44:00"  // set date 
 set cron every 10 minutes : */10 * * * * command
@@ -51,17 +48,10 @@ means every 2 minuts in first  10 minutes : 0-10/2 * * * *
 @hourly  : 0 * * * *
 @reboot  runs at startup
 
-write a shell script to monitor disk space usage :
-{
-df -hk | grep tmp > /tmp/vij/s
-var=`cat /tmp/vij/s | awk '{ print $5 }'`
-var1=`echo"${var::-1}"`
-echo $var1
-}  // this script is not completed still
 
 remove blank line from file
-cat filename | grep -v "^$" > temp_file
-
+sed  -i '/^$/d' filename
+ 
 [ram2@atrcxb2957 t]$ cat t  //create 50 users 
 #!/bin/bash
 
@@ -324,11 +314,12 @@ A symbolic or soft link is an actual link to the original file, whereas a hard l
 
 In a nutshell, a soft link
 
-can cross the file system,
+can cross the partitions,
 allows you to link between directories,
 has different inode number and file permissions than original file,
 permissions will not be updated,
 has only the path of the original file, not the contents.
+
 A hard Link
 
 can’t cross the file system boundaries (i.e. A hardlink can only work on the same filesystem),
@@ -546,7 +537,7 @@ echo "I like Bash" | wc -c
 # Count length using `awk` command
 echo "I like Python" | awk '{print length}'
 
-https://www.slashroot.in/suid-and-sgid-linux-explained-examples  // sticky bit , SUID and SGID
+
 
 ===========================
 
@@ -967,6 +958,8 @@ In which location the sudo user commands history is logged?
 All the sudo users commands history is logged in /var/log/secure
 ============
 Umask
+
+File : /etc/bashrc
 
 For example, let’s calculate how a new file or directory permission will affect because of umask.
 
