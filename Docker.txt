@@ -66,3 +66,87 @@ docker container cp test/ container_id:/tmp/ it will copy files from current ser
 docker container export container id > my_ubuntu_git_mysql.tar  // this will export the container with all its installed app(here git and mysql) into my_ubuntu_git_mysql.tar file , instead of > we can use -o also.
 
 docker image import my_ubuntu_git_mysql.tar // for importing the image
+
+======================
+
+how to run a container in deatchc mode
+docker run -d ubuntu sleep 100
+
+
+how to bring detached container to foreground i.e. attached mode
+
+docker attach < container id >
+
+how to stop all running docker
+docekr stop $(docker ps -aq)
+
+hwo to remove all the docker images
+docker rmi $(docker images -aq)
+
+build a docker image and name it as webapp-color
+docker build -t webapp-color .
+==============================
+
+what is difference between cmd and entrypoint 
+
+CMD sets default command and/or parameters, which can be overwritten from command line when docker container runs.
+ENTRYPOINT command and parameters will not be overwritten from command line. Instead, all command line arguments will be appened after ENTRYPOINT parameters.
+
+in case of cmd the command line parameter will get replaced completely, in case of entrypoint the command line parameter will get appended entrypoint parameter 
+
+from UBUNTU
+cmd sleep 5
+
+: docker run ubuntu-sleeper sleep 10    // it will sleep for 10 seconds 
+
+: docekr run ubuntu-sleeper  // it will sleep for 5 seconds
+
+
+from UBUNTU
+entrypoint ["sleep"]
+
+: docker run ubuntu-sleeper 10 // it wll sleep for 10 seconds
+: docker run ubuntu-sleeper    // it will throw error "missing operand"
+
+
+from UBUNTU 
+entrypoint ["sleep"]
+cmd ["5"]  
+
+: docker run ubuntu-sleeper 10 // will sleep for 10 secconds
+: docker run ubuntu-sleeper  // will sleep for 5 seconds
+
+
+==============
+how to change the entrypoint at runtime
+
+docker run --entrypoint new_sleep ubuntu-sleeper 10
+
+===================
+Run a container named blue-app using image kodekloud/simple-webapp and set the environment variable APP_COLOR to blue. Make the application available on port 38282 on the host. The application listens on port 8080
+
+docker run --name blue-app -p 38282:8080 -e APP_COLOR=blue -d kodekloud/simple-webapp
+
+
+Deploy a mysql database using the mysql image and name it mysql-db.
+===============
+
+Set the database password to use db_pass123. Lookup the mysql image on Docker Hub and identify the correct environment variable to use for setting the root password.
+
+docker run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db mysql 
+================
+how to give tag to image
+
+docker tag simple-image bhalekarvijay5/simple-image
+
+====================
+what is difference between RUN and CMD
+
+the RUN get excuted during building of image 
+
+CMD get executed only when u create container out of image
+
+==========
+
+How to get ip address of running container
+docker inspect <container id>  | grep -i ipaddress
