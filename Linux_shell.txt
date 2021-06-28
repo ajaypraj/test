@@ -1026,4 +1026,114 @@ arr=(apple)  # an indexed array with a single element
 20 | "!cmd"      | cmd args    | expands to the most recent command matching "cmd"
 21 | $'!cmd'     | !cmd        | history expansion character '!' is ignored inside ANSI-C quotes
 ---+-------------+-------------+--------------------------------------------------------------------
+===============
+process management
+what are differenet process stat
+1) D : Uninterruptible sleep ( usually IO)
+take example of backup process, here trying to write some data to disk but bcoz of some reason disk is not responding in this case process will wait for some time and then it will go to D state
+
+2) R : this is a state where process is either running or ready to run
+
+3) S : Interuptible sleep ( waiting for an event to complete)
+
+4) T : stopped
+once the process is completed this state occurs , this process can be restarted
+
+5) Z : Defunct(zombie) : in case parent process is killed by someone ( by mistakely) . in this case all its child prcess becomes zombie.
+
+===================
+with fg the last process which sent to bg is brought to foreground
+
+with CTRL + Z the foreground process we can stop ( not terminate),  this process we can later see in "jobs" command 
+
+
+=========
+
+how to check which packages are installed recently on system
+rpm -qa --last
+
+how to install a packages without taking care of any dependency 
+
+rpm -ivh --nodeps python-2.8.rpm
+
+how to check all files that are associated with any package :
+rpm -ql python-2.8rpm
+
+how to check all dependant package on current package :
+rpm -qpR python-2.8.rpm
+
+how to remove(uninstall) a package forcefully ( i.. e. without removing the dependencies fo that package)
+
+rpm -evh --nodeps python-2.8.rpm
+
+
+
+how to check any binary file is associated with which rpm package
+rpm -qf /bin/mount
+  
+===================
+performance monitoring
+1) CPU
+1.1 contenxt switch :
+when cpu switches from one process to another process then it is callled context switch , higher level of context siwtching can cause performance issue.
+
+
+1.2 run queue:
+run queue indicates active no of proess in current queue for cpu
+when cpu is ready to execute a process, it picks up from run queue based on priority
+processes in sleep state or io wait are not in run queue
+so higher no of process in run queue can cause performance issue.
+
+1.3 cpu utilization
+this indicates how much of cpu is currently utilized
+100 % of cpu utilization means system is fully loaded , so this can cause oerformance issues
+
+1.4 load average
+this indicates average cpu load over specific period of time
+load average is calculated  by combining both total no of process in queue  and total no of uninterruptable task  status
+
+2) Memory
+2.1) IO
+io wait is amount of time cpu is waiting for io. if u see consistent high io wait on system , it indicates a problem with disk system
+
+you should also monitor read/second and write/second. this is measured in blocks. i. e. no of read/write per second.
+
+tps indicates total txn per second which is sum of read tps and write tps.
+
+==============
+Top command
+as administrator we need to keep eye on
+load average
+zombie process count
+%CPU : 
+us : % CPU time spent in user space
+sy : % CPU time spent in kernel space
+ni : Time spent running niced user processes (User defined priority)
+id : % CPU time spent in idle
+wa : % CPU time spent in wait (on disk)
+hi : % CPU time spent servicing/handling hardware interrupts
+si : % CPU time spent servicing/handling hardware interrupts
+st : the amount of cpu assigned for any vm running on your system by hypervisor
+
+==============
+vmstat 10 
+by this command the output will come after every 10 seconds
+
+[root@localhost ~]# vmstat 10
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 2  0  26648  68924     40 208964    0    3   124     7   88   84  0  1 98  1  0
+ 
+r: stads for run queue, here 2 processes are waiting for CPU
+b: here 0 processes are waiting for IO 
+swapd : how many pages/ blocks are swapped to disk 
+si : the no of pages moved from swap to physical memory
+so: the no of pages moved from physical memory to swap
+bi : no of blocks read from disk
+bo : no of blocks sento to disk
+in : no of interrupts per second 
+cs : no of context switches second
+
+
+================
 
