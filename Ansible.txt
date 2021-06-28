@@ -1,6 +1,142 @@
-ansible-playbook http.yml --syntax-check  // for checking the syntax of yml file
 
-ansible-playbook -i /root/hosts http.yml // for providing user defined inventory
+ansible -m command -a "dmidecode" dev
+
+this command will fail bcoz normal user doesn't have previlidges to run dmidecode comand
+
+in sudoers file entry for vijay user is like 
+vijay ALL=(ALL) NOPASSWD: ALL
+
+ansible -m command -a "dmidecode" dev --become // now this command will run as vijay users previlidges are getting elevated to root user and bcoz of suoder's file entry it is not asking for password as well
+
+===============
+now if changing entry to 
+vijay ALL=(ALL) PASSWD: ALL
+
+and running below command
+
+ansible -m command -a "dmidecode" dev --become
+
+then also it will fail bcoz password is not specified
+
+ansible -m command -a "dmidecode" dev --become -K 
+
+now it will ask for password and will return output
+=============
+
+what is difference between command and shell
+
+command is not suitable when we need shell variables associated with that shell
+ansible -m command -a "set" dev -K
+BECOME password: 
+localhost | FAILED | rc=2 >>
+[Errno 2] No such file or directory
+
+
+for shell we are getting output
+===============
+
+how to do dry check for playbook
+
+ansible-playbook ftp.yml -C
+
+
+how to do step by step execution for playbook 
+
+ansible-playbook --step ftp.yml
+
+
+ansible-playbook --syntax-check ftp.yml
+
+how to ignore errors in playbook
+ignore_errors: yes 
+
+
+how to run playbook only on one host from hosts file
+cat hosts
+localhost
+172.110.1.2
+
+ansible-playbook -i hosts ftp.yml --limit localhost
+
+===========
+ansible-playbook -i /opt/docker/hosts /opt/docker/simple-devops-image.yml;
+
+========
+---
+- hosts: dev
+  become: true
+  vars:
+   ftp: vsftpd
+   firewall: firewalld
+  tasks:
+    - name: print uptime
+      command: uptime
+    - name: install packages
+      yum:
+       name:
+       - "{{ ftp }}"
+       - "{{ firewall }}"
+	   
+================
+---
+- hosts: dev
+  become: true
+  vars:
+   src: "/etc/ansible/vij/"
+   file: "/etc/ansible/vijay"
+  tasks:
+    - name: create directory
+      file:
+              state: directory
+              path : "{{ src }}"
+              recurse: yes
+              owner: vij
+              group: vij
+
+    - name: copy file
+      copy:
+              src: "{{ file }}"
+              dest: "{{ src }}"
+
+================
+host and group variables
+
+cat hosts 
+[server1]
+demo1 ansible_user=vijay
+demo2 ansible_user=ajay
+[server2]
+demo3
+demo4
+[servers:children]
+server1
+server2
+[servers:var]
+ansible_user=john
+==============
+ansible facts are variables that are autimatically discovered by ansible from managed hosts
+
+========
+conditionals in ansible
+
+poweroff system when it is centos
+
+- name: poweroff system
+  command: poweroff
+  when: ansible_os_family == "CentOS"
+  
+loops in ansibles
+
+  
+    - name: print loop
+      debug :
+              msg : "{{ item }}"
+      with_items:
+              - "hello1"
+              - "hello2"
+
+
+============================
 copy:
 - name: copy brooklyn.cfg into {{cfg_location}}
   template: dest=/etc/amp/brooklyn.cfg  src=brooklyn.cfg.j2 mode=0600  owner={{amp_user}}  group={{amp_user}}
@@ -27,9 +163,6 @@ want to perform same thing with multiple items:
     - openldap-clients
     - libselinux-python
 	
-shell or command:
-for anything not specified 
-
 
 If Else condition:
 - name: "Check whether id_rsa exists"
@@ -79,8 +212,6 @@ m=module name
 a= arguments
 
 Ansible abc -m yum -a "name = demo-tomcat-1 state = latest" 
-
-
 
 =========================VAULT================
 ansible-vault encrypt  http.yml  // to set the password
