@@ -1137,3 +1137,6 @@ cs : no of context switches second
 
 ================
 
+Jenkins pluggin frequently used:
+Git plugin
+ssh plugin
