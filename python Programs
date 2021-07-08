@@ -450,20 +450,22 @@ Then, the output should be:
 500
 
 >>> def test():
-	dic={}
-	sum=0
-	n=int(input("enter no of transcations"))
+	n=int(input("enter no of txn"))
+	d=dict()
 	for i in range(n):
-		key=input("enter transcation type")
-		value=int(input("enter amount"))
-		dic[key]=value
-	for k,v in dic.items():
-		if k == "D":
-			sum+=int(v)
-		elif k == "W":
-			sum -=int(v)
-	print(sum)
-
+		t=input("enter type")
+		v=int(input("enter amount"))
+		if t not in d.keys():
+			d[t]=v
+		else:
+			d[t]+=v
+	summ=0
+	for k,v in d.items():
+		if k == 'd':
+			summ+=v
+		else:
+			summ-=v
+	print(summ)
 	
 >>> test()
 enter no of transcations2
@@ -657,6 +659,9 @@ def test(s):
 		print("yes")
 	else:
 		print("no")
+		
+def test(s):
+	return False if len(set(s)) > 2 else True
 		
 test("101010001")
 yes
@@ -911,6 +916,11 @@ def test(a1 , a2):
 		
 >>> test([1,2,3,4],[1,2,3])
  4 is missing 
+ 
+def test(l1,l2):
+	return sum(l1)-sum(l2)
+
+
  
 15) 
 Given a string in the form 'AAAABBBBCCCCCDDEEEE' compress it to become 'A4B4C5D2E4'. For this problem, you can falsely "compress" strings of single or double letters. For instance, it is okay for 'AAB' to return 'A2B1' even though this technically takes more space.
@@ -1246,6 +1256,8 @@ from statistics import mean
 >>> test([1,2,3,4,5])
 3
 ================
+Find no of digits in number
+
 def test(n):
 	if n == 0:
 		return 1
@@ -1532,7 +1544,14 @@ Explanation: 1, 2 and 3 are all lucky numbers, return the largest of them.
 	    ll.sort()
 	    return -1 if len(ll) == 0 else ll.pop()
 		
-		
+
+def test(s):
+	f=[]
+	for i in s:
+		if i == s.count(i):
+			f.append(i)
+	return max(f) if f else -1
+	
 =================================
 Balanced strings are those who have equal quantity of 'L' and 'R' characters.
 
@@ -1685,26 +1704,6 @@ def test(words):
 		s.add(temp)
 	return len(s)
 	
-	================
- Replace Elements with Greatest Element on Right Side
- Given an array arr, replace every element in that array with the greatest element among the elements to its right, and replace the last element with -1.
-
-After doing so, return the array.
-
- 
-
-Example 1:
-
-Input: arr = [17,18,5,4,6,1]
-Output: [18,6,6,6,1,-1]
-
-
-    def replaceElements(self, arr: List[int]) -> List[int]:
-        for i in range(len(arr)-1):
-            arr[i] = max(arr[i+1:])
-        arr=arr[:-1]
-        arr.append(-1)
-        return arr
 
 ====================
 
@@ -1768,5 +1767,3 @@ find permutation of string without using itertools
 
 >>> list(product('abc'))
 ['aaa', 'aab', 'aac', 'aba', 'abb', 'abc', 'aca', 'acb', 'acc', 'baa', 'bab', 'bac', 'bba', 'bbb', 'bbc', 'bca', 'bcb', 'bcc', 'caa', 'cab', 'cac', 'cba', 'cbb', 'cbc', 'cca', 'ccb', 'ccc']
-
-==================
