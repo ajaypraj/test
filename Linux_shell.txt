@@ -1,4 +1,3 @@
-
 count no of lines in file : wc -l filename
 count no of words in file : wc -w filename
 
@@ -29,6 +28,13 @@ netstat -anp | grep httpd  // for checking httpd is running on which port
 tcp6       0      0 :::80                   :::*                    LISTEN      9461/httpd
 unix  3      [ ]         STREAM     CONNECTED     188023   9461/httpd
 
+ -n : If you do not need to know the host name and just the ip address is sufficient then suppress the hostname lookup with the n option.
+ -t : To list out only tcp connections use the t options.
+ -u : To list out only udp connections use the t options.
+ -a :  to list out all the current connections.
+ -p : When viewing the open/listening ports and connections, its often useful to know the process name/pid which has opened that port or connection. The process details are made available by the 'p' option.
+ 
+ 
 
 how to redirect error and output to logfile 
 
@@ -36,14 +42,26 @@ how to redirect error and output to logfile
 bash file.txt 2> logfile.txt
 2 for error
 ==============
+how to set cron for every sunday
+00 00 * * * 0
+00 00 * * * 7
+00 00 * * * Sun
 
-date -s "27 AUGUST 2018 15:44:00"  // set date 
+how to set cron for first sunday of every month
+0 0 1-7 * 0 cmd
+0 0 * * 0 [ `date '+%e'` -le 7 ] && cmd
+
+cron job to run on second to last friday each month
+00 00 8-31 * 5
+
+
 set cron every 10 minutes : */10 * * * * command
 at 11 Am nad 4 PM : 		00 11,16 * * * command 
 from 9 AM to 6 PM : 		00 09-18 * * *
 from 9 AM to 6 PM ( weekdays only)		: 00 09-18 * * 1-5
 means every 2 minuts in first  10 minutes : 0-10/2 * * * *
 @yearly  : 0 0 1 1 *
+@monthly : 0 0 1 * * 
 @daily   : 0 0 * * *
 @hourly  : 0 * * * *
 @reboot  runs at startup
@@ -92,7 +110,7 @@ enter the content followd by CTRL + D
 
 [root@system1 ~]# date -u
 Sat Mar 23 17:39:05 UTC 2019
-[root@system1 ~]# date -s "Sat Mar 23 23:08:08"
+[root@system1 ~]# date -s "Sat Mar 23 23:08:08"  // how to set new date
 Sat Mar 23 23:08:08 IST 2019
 [root@system1 ~]#  date +"%T"
 23:10:46
@@ -216,8 +234,6 @@ find . -type f -name "abc.txt"  | xargs ls -l {} \;
 while finding if you want to search the file only upto 2 directories 
 find . -maxdepth 2 -name abc.txt
 
-Top command 
-https://www.howtogeek.com/668986/how-to-use-the-linux-top-command-and-understand-its-output/
 
 Grep :
 variants of grep 
@@ -973,19 +989,7 @@ Output:
 u=rwx,g=rx,o=rx
 
 =============
-how to set cron for every sunday
-00 00 * * * 0
-00 00 * * * 7
-00 00 * * * Sun
 
-how to set cron for first sunday of every month
-0 0 1-7 * 0 cmd
-0 0 * * 0 [ `date '+%e'` -le 7 ] && cmd
-
-cron job to run on second to last friday each month
-00 00 8-31 * 5
-
-==============
 
 single quote and double quote meaning in unix
 
@@ -1079,7 +1083,7 @@ so higher no of process in run queue can cause performance issue.
 
 1.3 cpu utilization
 this indicates how much of cpu is currently utilized
-100 % of cpu utilization means system is fully loaded , so this can cause oerformance issues
+100 % of cpu utilization means system is fully loaded , so this can cause performance issues
 
 1.4 load average
 this indicates average cpu load over specific period of time
@@ -1107,6 +1111,9 @@ wa : % CPU time spent in wait (on disk)
 hi : % CPU time spent servicing/handling hardware interrupts
 si : % CPU time spent servicing/handling hardware interrupts
 st : the amount of cpu assigned for any vm running on your system by hypervisor
+
+Top command 
+https://www.howtogeek.com/668986/how-to-use-the-linux-top-command-and-understand-its-output/
 
 ==============
 vmstat 10 
