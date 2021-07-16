@@ -2,7 +2,7 @@ Following python Modules are used:
 paramiko, paramiko_expect ,pytest, csv, json, shutil,  logging, itertools, functools, subprocess, os,time,  datetime, sys, math
 =========================
 difference between a+, r+ and w+ in file handling python
-r+ Opens a file for both reading and writing. The file pointer placed at the beginning of the file. 
+r+ Opens a file for both reading and writing. The file pointer placed at the beginning of the file for reading and for writing pointer is placed at end of file. 
 w+ Opens a file for both writing and reading. Overwrites the existing file if the file exists.if file exists already then existing data is flushed out.
 a+ Open for reading and appending (writing at end of file). The file is created if it does not exist. The initial file position for reading is at the beginning of the file, but output is appended to the end of the file
 
@@ -1122,6 +1122,30 @@ d=dict(zip(l1,l2))
 >>> d
 {1: 'one', 2: 'two', 3: 'three'}
 
+
+from itertools import cycle 
+  
+# initializing lists 
+test_list1 = [7, 8, 4, 5, 9, 10] 
+test_list2 = [1, 5, 6] 
+  
+# printing original lists 
+print ("The original list 1 is : " + str(test_list1)) 
+print ("The original list 2 is : " + str(test_list2)) 
+  
+# using itertools.cycle() 
+# zipping of two different size list  
+res = list(zip(test_list1, cycle(test_list2)) 
+            if len(test_list1) > len(test_list2) 
+            else zip(cycle(test_list1), test_list2)) 
+  
+# printing result  
+print ("The zipped list is : " +  str(res)) 
+Output:
+The original list 1 is : [7, 8, 4, 5, 9, 10]
+The original list 2 is : [1, 5, 6]
+The zipped list is : [(7, 1), (8, 5), (4, 6), (5, 1), (9, 5), (10, 6)]
+
 =============
 what is o/p of below code:
 l1=[1,2,3,4]
@@ -1461,32 +1485,6 @@ Output:
 
 Inside __delete__
 Inside __del__
-
-
-=================================
-
-from itertools import cycle 
-  
-# initializing lists 
-test_list1 = [7, 8, 4, 5, 9, 10] 
-test_list2 = [1, 5, 6] 
-  
-# printing original lists 
-print ("The original list 1 is : " + str(test_list1)) 
-print ("The original list 2 is : " + str(test_list2)) 
-  
-# using itertools.cycle() 
-# zipping of two different size list  
-res = list(zip(test_list1, cycle(test_list2)) 
-            if len(test_list1) > len(test_list2) 
-            else zip(cycle(test_list1), test_list2)) 
-  
-# printing result  
-print ("The zipped list is : " +  str(res)) 
-Output:
-The original list 1 is : [7, 8, 4, 5, 9, 10]
-The original list 2 is : [1, 5, 6]
-The zipped list is : [(7, 1), (8, 5), (4, 6), (5, 1), (9, 5), (10, 6)]
 
 
 ======================
@@ -1909,3 +1907,310 @@ how to replace the word "nahur" with "bhandup" present in file python ( source a
 	with open(r'C:\Users\VIJAY\Desktop\test.txt' ,'w+') as f:
 		f.writelines(data.replace('nahur','bhandup'))
 		
+
+
+
+=======================
+json module
+
+
+d= {'c': 'CC', 'd': 'dd', 'b': 'BB'}
+
+dd=json.dumps(d, sort_keys=True, indent=2, separators=(" . "," = "))
+>>> dd
+'{\n  "b" = "BB" . \n  "c" = "CC" . \n  "d" = "dd"\n}'
+
+read file by json package
+
+emp.json
+{
+    "emp_details": [
+	    { 
+		    "emp_name": "vijay",
+			"emp_email": "bb@gmail.com",
+			"designation": "developer"
+		},
+		{
+		    "emp_name": "ajay",
+			"emp_email": "aa@gmail.com"
+		}
+	]	
+
+}
+
+
+# Python program to read
+# json file
+
+
+import json
+
+# Opening JSON file
+f=open(r"C:\Users\Vijay\Desktop\emp.json",)
+
+# returns JSON object as
+# a dictionary
+data = json.load(f)
+
+# Iterating through the json
+# list
+for i in data['emp_details']:
+	print(i)
+
+# Closing file
+f.close()
+
+o/p:
+	
+{'emp_name': 'vijay', 'emp_email': 'bb@gmail.com', 'designation': 'developer'}
+{'emp_name': 'ajay', 'emp_email': 'aa@gmail.com'}
+
+
+
+=========
+write json to file
+
+import json
+
+person_dict = {"name": "Bob",
+"languages": ["English", "Fench"],
+"married": True,
+"age": 32
+}
+
+with open('person.txt', 'w') as json_file:
+  json.dump(person_dict, json_file)
+  
+===================
+
+CSV Module
+
+read a csv file
+# importing csv module
+import csv
+
+# csv file name
+filename = "aapl.csv"
+
+# initializing the titles and rows list
+fields = []
+rows = []
+
+# reading csv file
+with open(filename, 'r') as csvfile:
+	# creating a csv reader object
+	csvreader = csv.reader(csvfile)
+	
+	# extracting field names through first row
+	fields = next(csvreader)
+
+	# extracting each data row one by one
+	for row in csvreader:
+		rows.append(row)
+
+	# get total number of rows
+	print("Total no. of rows: %d"%(csvreader.line_num))
+
+# printing the field names
+print('Field names are:' + ', '.join(field for field in fields))
+
+# printing first 5 rows
+print('\nFirst 5 rows are:\n')
+for row in rows[:5]:
+	# parsing each column of a row
+	for col in row:
+		print("%10s"%col),
+	print('\n')
+
+
+============
+write to csv file
+
+# importing the csv module
+import csv
+
+# field names
+fields = ['Name', 'Branch', 'Year', 'CGPA']
+
+# data rows of csv file
+rows = [ ['Nikhil', 'COE', '2', '9.0'],
+		['Sanchit', 'COE', '2', '9.1'],
+		['Aditya', 'IT', '2', '9.3'],
+		['Sagar', 'SE', '1', '9.5'],
+		['Prateek', 'MCE', '3', '7.8'],
+		['Sahil', 'EP', '2', '9.1']]
+
+# name of csv file
+filename = "university_records.csv"
+
+# writing to csv file
+with open(filename, 'w') as csvfile:
+	# creating a csv writer object
+	csvwriter = csv.writer(csvfile)
+	
+	# writing the fields
+	csvwriter.writerow(fields)
+	
+	# writing the data rows
+	csvwriter.writerows(rows)
+
+======
+write multiple rows to file with csv, read from dict
+# importing the csv module
+import csv
+
+# my data rows as dictionary objects
+mydict =[{'branch': 'COE', 'cgpa': '9.0', 'name': 'Nikhil', 'year': '2'},
+		{'branch': 'COE', 'cgpa': '9.1', 'name': 'Sanchit', 'year': '2'},
+		{'branch': 'IT', 'cgpa': '9.3', 'name': 'Aditya', 'year': '2'},
+		{'branch': 'SE', 'cgpa': '9.5', 'name': 'Sagar', 'year': '1'},
+		{'branch': 'MCE', 'cgpa': '7.8', 'name': 'Prateek', 'year': '3'},
+		{'branch': 'EP', 'cgpa': '9.1', 'name': 'Sahil', 'year': '2'}]
+
+# field names
+fields = ['name', 'branch', 'year', 'cgpa']
+
+# name of csv file
+filename = "university_records.csv"
+
+# writing to csv file
+with open(filename, 'w') as csvfile:
+	# creating a csv dict writer object
+	writer = csv.DictWriter(csvfile, fieldnames = fields)
+	
+	# writing headers (field names)
+	writer.writeheader()
+	
+	# writing data rows
+	writer.writerows(mydict)
+
+=======
+
+$ pip install virtualenv
+
+
+$ virtualenv --version
+
+$ virtualenv my_name
+
+$ source virtualenv_name/bin/activate
+
+(virtualenv_name)$ deactivate
+
+===========
+memory manaement in python 
+
+name variables ( reference variables) gets memory in stack space
+x=10
+here x is stored in stack 
+in actuall reference of memory is stored at stack space 
+Methods are executed from stack memory 
+methods and variables are created on stack memory 
+new stack frame is created on invocation of new method 
+stack frames are destroyed as soon as method is returned 
+
+
+private Heap space
+we are not allowed to directly access this space 
+we can access this by only its id ( reference ) 
+
+
+Garbage collection is mechanism to cleanup the dead objects 
+
+===========
+difference between list and tuple 
+
+
+both can store heterogenous item, support indexing, support slicing, support  
+list is mutable and tuple is immutable
+
+we should use list in case we are going to use insertion , updation , deletion frequently 
+in case we are supposed to only access then use tuple 
+
+tuple provides count and index only 
+
+==========
+what is identity operator 
+
+1) is 
+2) is not 
+
+x=10
+y=10
+
+print(x is y)
+True
+
+in case address of x and y is same then it return True 
+
+============
+what is monkey patching 
+
+dynamic replacement of attribute at runtime 
+changing behaviour of class at runtime 
+
+class test:
+	def __init__(self,x):
+		self.a=x
+	def get_data(self):
+		print("some code to fetch data from db")
+	def f1(self):
+		self.get_data()
+	def f2(self):
+		self.get_data()
+
+		
+>>> t1=test(2)
+>>> t1.f1()
+some code to fetch data from db
+>>> t1.f2()
+some code to fetch data from db
+>>> def new_get_data(self):
+	print("new code to fetch data from db")
+
+	
+>>> test.get_data=new_get_data
+>>> t1.f1()
+new code to fetch data from db
+>>> t1.f2()
+new code to fetch data from db
+
+=============
+
+print first 10 prime numbers with help of generator
+
+def isPrime(num):
+	for i  in range(2,num):
+		if num%2 == 0:
+			return False
+	return True
+	
+def primegenerator(num):
+	n=2
+	while num:
+		if isPrime(n):
+			yield n
+			num-=1
+		n+=1
+	return
+it=primegenerator(10)
+
+for i in it:
+	print(i,end=" ,")
+
+	
+2 ,3 ,5 ,7 ,9 ,11 ,13 ,15 ,17 ,19 ,
+
+==========
+factorial of n using lambda 
+f=lambda n: 1 if n ==0 else n*f(n-1)
+f(4)
+
+=============
+what is difference between sorted and sort
+
+sorted is applciable on all iterables, it always returns a list, it doesnt make change in existing data structure , it creates new list with sorted element
+sort is only for list , it make changes in existing list only , it return None
+
+
+
