@@ -1136,7 +1136,97 @@ cs : no of context switches second
 
 
 ================
+how to get the column no of salary 
 
+cat t
+fname lname    address salary gender
+vijay bhalekar bhandup 1000   Male
+
+awk -v name='salary' '{for (i=1;i<=NF;i++) if ($i==name) print i;exit}' t
+4
+================
+no of time string has appeared in file 
+
+cat t
+HI vijay. how are you vijay
+are u there vijay
+
+[root@ip-172-31-4-201 ~]# grep -o "vijay" t | wc -l
+3
+==============
+how to check direcotry is empty or not in bash
+
+if [ "$(ls /root/tt)" ]; 
+then  
+echo "yes"
+fi
+==================
+
+date manipulation in bash 
+https://linuxconfig.org/addition-and-subtraction-arithmetics-with-linux-date-command
+
+
+ls -l | cut -d" " -f 6,7,8
+Jul 17 07:13
+================
+which command shows cpuinfo in bash
+lscpu
+
+cat /proc/cpuinfo
+
+for getting no of cpu 
+$ nproc 
+
+===========
+which command shows filesystem type in bash
+
+df -hT
+
+=============
+what is load average in top command
+https://www.site24x7.com/blog/load-average-what-is-it-and-whats-the-best-load-average-for-your-linux-servers#:~:text=The%20load%20average%20is%20the,a%20defined%20period%20of%20time.&text=Typically%2C%20the%20top%20or%20the,%2C%20five%2C%20and%2015%20minutes.
+
+Before getting into how to measure the load average output and what each of these values mean, let's get into the simplest example: a server with a single core processor. 
+
+Breaking down the load
+
+A server with a single core processor is like a single line of customers waiting to get their items billed in a grocery store. During peak hours, there is usually a long line and the waiting time for every individual is also high. 
+
+If you're the cashier and want to record the waiting time, one important metric would be the number of people waiting during a particular period of time. If there are no customers waiting, then the wait time is zero. On the other hand, if there is a long line of customers, then the wait time is high. 
+
+Applying that to the load average output (0.5, 1.5, 3.0) that we got above: 
+
+0.5 means the minimum waiting time at the counter. Between 0.00 and 1.0, there is no need to worry. Your servers are safe!
+1.5 means the queue is filling up. If the average gets any higher, things are going to start slowing down.
+3.00 means there's a considerably long queue waiting, and an extra resource/counter is required to clear up the queue faster. 
+
+What you want is a queue/load average value between 0.00 and 1.00. So can we conclude that the ideal load average is 1.00, and anything above that is an action call to troubleshoot? Well, although it's a safe bet, a more proactive approach is leaving some extra headroom to manage unexpected loads.
+
+Multicores and multiprocessors to the rescue
+
+Are a single quad core processor and a server with four processors (with one core each) the same? Relatively, yes. The main difference between multicore and multiprocessor is that the former refers to a single CPU having multiple cores, while the latter refers to multiple CPUs. To sum up: one quad core is equal to two dual cores which is equal to four single cores.
+
+The load average is relative to the number of cores available in the server and not how they are spread out over CPUs. This means the maximum utilization range is 0-1 for a single core, 0-2 for a dual core, 0-4 for a quad core, 0-8 for an octa-core, and so on. 
+
+Referring to the cashier example again, a load of 1.00 would mean the capacity is just right on a single core processor; while on a dual core processor, a load of 1.50 would mean one line is filled up, and the other line is filling up. Similarly, a load of 5.00 on a quad core processor is something to worry about, while on an octa-core processor, 5.00 is only just filling up, and there is optimum space available. 
+
+=======================
+I am not able to unmount filesystem , what can  be reason and how to get the reason why not able to unmount fs
+
+lsof | grep '<mountpoint of /dev/sda1>' 
+
+pkill target_process 
+
+umount /dev/sda1 
+===============
+Find total no of diretories in given path in form of array
+arr=(/tmp/*)
+[root@ip-172-31-4-201 ~]# for i in ${arr[@]};do echo $i ; done
+
+/tmp/vi
+/tmp/vij
+/tmp/vijay
+===========
 Jenkins pluggin frequently used:
 Git plugin
 ssh plugin
