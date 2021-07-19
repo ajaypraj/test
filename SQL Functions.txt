@@ -243,6 +243,10 @@ where N is 3 in case you want 3rd highest salary
 Query for getting N maximum salaries
 
 select * from worker w1 where N-1>=( select count(distinct salary) from worker w2 where w2.salary > w1.salary) order by salary desc;
+============================
+ Write an SQL query to print the name of employees having the highest salary in each department.
+ 
+select t.first_name, t.salary, t.department from ( select max(salary) as totalsalary , department from Worker group by department) as tempnew inner join Worker t where t.department=tempnew.department and t.salary = tempnew.totalsalary;
 ==============================
 SQL
 
