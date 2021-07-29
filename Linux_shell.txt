@@ -1227,6 +1227,95 @@ arr=(/tmp/*)
 /tmp/vij
 /tmp/vijay
 ===========
+sort two files simultaneously
+
+sort -nu file1 file2
+ -n : for numeric
+ -u : for unique
+ 
+ 
+======
+ ls {*.txt,*.pdf}
+abc.txt  pp.pdf
+======
+grep -h  "1" *  // to hide the name of file 
+grep -E "1|5" *   // for searching two strings at a time 
+
+==========
+what is difference between 
+if [-n "$str" ]
+and 
+if [-z "$str" ]
+
+Ans : if [-n $str ], returns true if length of string is nonzero
+if [-z $str ] return true if length of string is zero
+
+
+============
+#!/bin/bash
+
+
+counter=0
+filename=file1
+
+cat $filename | while read line;
+do
+echo $line
+counter=$(($counter+1))
+done
+
+echo "$filename has $counter no of lines"
+
+
+
+ cat file1
+-1
+-5
+3
+7
+2
+
+
+bash check
+-1
+-5
+3
+7
+2
+file1 has 0 no of lines
+
+
+why this script is printing Op as 0 lines
+
+ANS: bcoz  cat $filename | while read line; this line is giving rise to another shell bcoz of "|" hence counter value is getting set to 5 into that shell not in outer shell and we are printing counter value in outer shell.
+
+#!/bin/bash
+
+
+counter=0
+filename=file1
+
+while read line;
+do
+echo $line
+counter=$(($counter+1))
+done < $filename
+
+echo "$filename has $counter no of lines"
+
+bash check
+-1
+-5
+3
+7
+2
+file1 has 5 no of lines
+=============
+how to generate random no in bash
+echo $RANDOM
+
+
+===========
 Jenkins pluggin frequently used:
 Git plugin
 ssh plugin
