@@ -2198,7 +2198,85 @@ it=primegenerator(10)
 for i in it:
 	print(i,end=" ,")
 
+============
+============
+Operator Overloading means giving extended meaning beyond their predefined operational meaning. For example operator + is used to add two integers as well as join two strings and merge two lists. It is achievable because ‘+’ operator is overloaded by int class and str class. You might have noticed that the same built-in operator or function shows different behavior for objects of different classes, this is called Operator Overloading. 
+ 
+ 
+ Consider that we have two objects which are a physical representation of a class (user-defined data type) and we have to add two objects with binary ‘+’ operator it throws an error, because compiler don’t know how to add two objects. So we define a method for an operator and that process is called operator overloading. We can overload all existing operators but we can’t create a new operator. To perform operator overloading, Python provides some special function or magic function that is automatically invoked when it is associated with that particular operator. For example, when we use + operator, the magic method __add__ is automatically invoked in which the operation for + operator is defined.
+ 
+class A:
+    def __init__(self, a):
+        self.a = a
+ 
+    # adding two objects
+    def __add__(self, o):
+        return self.a + o.a
+ob1 = A(1)
+ob2 = A(2)
+ob3 = A("Geeks")
+ob4 = A("For")
+ 
+print(ob1 + ob2)
+print(ob3 + ob4)
+
+
+class A:
+    def __init__(self, a):
+        self.a = a
+    def __gt__(self, other):
+        if(self.a>other.a):
+            return True
+        else:
+            return False
+ob1 = A(2)
+ob2 = A(3)
+if(ob1>ob2):
+    print("ob1 is greater than ob2")
+else:
+    print("ob2 is greater than ob1")
 	
+Operator	Magic Method
++	__add__(self, other)
+–	__sub__(self, other)
+*	__mul__(self, other)
+/	__truediv__(self, other)
+//	__floordiv__(self, other)
+%	__mod__(self, other)
+**	__pow__(self, other)
+>>	__rshift__(self, other)
+<<	__lshift__(self, other)
+&	__and__(self, other)
+|	__or__(self, other)
+^	__xor__(self, other)
+Comparison Operators :
+Operator	Magic Method
+<	__LT__(SELF, OTHER)
+>	__GT__(SELF, OTHER)
+<=	__LE__(SELF, OTHER)
+>=	__GE__(SELF, OTHER)
+==	__EQ__(SELF, OTHER)
+!=	__NE__(SELF, OTHER)
+Assignment Operators :
+Operator	Magic Method
+-=	__ISUB__(SELF, OTHER)
++=	__IADD__(SELF, OTHER)
+*=	__IMUL__(SELF, OTHER)
+/=	__IDIV__(SELF, OTHER)
+//=	__IFLOORDIV__(SELF, OTHER)
+%=	__IMOD__(SELF, OTHER)
+**=	__IPOW__(SELF, OTHER)
+>>=	__IRSHIFT__(SELF, OTHER)
+<<=	__ILSHIFT__(SELF, OTHER)
+&=	__IAND__(SELF, OTHER)
+|=	__IOR__(SELF, OTHER)
+^=	__IXOR__(SELF, OTHER)
+Unary Operators :
+Operator	Magic Method
+–	__NEG__(SELF, OTHER)
++	__POS__(SELF, OTHER)
+~	__INVERT__(SELF, OTHER)
+============
 2 ,3 ,5 ,7 ,9 ,11 ,13 ,15 ,17 ,19 ,
 
 ==========
