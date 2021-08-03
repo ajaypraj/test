@@ -1313,8 +1313,9 @@ file1 has 5 no of lines
 =============
 how to generate random no in bash
 echo $RANDOM
-
-
+=============
+What is PATH Variable:
+The PATH variable is an environment variable that contains an ordered list of paths that Linux will search for executables when running a command. Using these paths means that we do not have to specify an absolute path when running a command.
 ===========
 Jenkins pluggin frequently used:
 Git plugin
