@@ -1855,6 +1855,12 @@ how to specify two conditions in list comprehension
 >>> [i for i in l if i%2 == 0 and i%3 == 0]
 [6]
 
+
+how to specify if else condition in list comprehension
+n=[1, 2, 3, 4, 5]
+print([i if i%2 == 0 else 99 for i in n])
+[99, 2, 99, 4, 99]
+
 ========================
 what is more faster for loop or list comprehension ?
 Python list comprehension is faster than plain loops. List comprehension is optimized for Python interpreter.
@@ -2289,6 +2295,25 @@ what is difference between sorted and sort
 
 sorted is applciable on all iterables, it always returns a list, it doesnt make change in existing data structure , it creates new list with sorted element
 sort is only for list , it make changes in existing list only , it return None
+============
+define custom exception 
 
+class ValueTooSmall(Exception):
+	pass
+	
+	
+while True:
+	try:
+		num=int(input("enter numebr "))
+		if num < n:
+			raise ValueTooSmall
+			
+	except ValueTooSmall:
+		print("error here")
+		break
+
+	
+enter numebr 3
+error here
 
 
