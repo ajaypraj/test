@@ -2315,5 +2315,83 @@ while True:
 	
 enter numebr 3
 error here
+===================
+
+class a:
+	def foo(a,*args):
+		print("A")
+
+		
+>>> class b:
+	def foo(a,b):
+		print("b")
+
+
+class c(a,b):
+	pass
+
+>>> cc=c()
+>>> cc.foo()
+
+
+what will be output ?
+
+OP : A
+
+=============
+a=[1,2,3]
+>>> b=a
+>>> b
+[1, 2, 3]
+>>> a.append(4)
+>>> a
+[1, 2, 3, 4]
+>>> b
+[1, 2, 3, 4]
+>>> a=None
+what will be output print(b) ?
+
+OP: [1, 2, 3, 4]
+=============
+what is advantage of generators
+
+Memory is saved as the items are produced when required, unlike normal Python functions. This fact becomes very important when you need to create a huge number of iterators
+
+===========
+what is partial functions
+
+Partial functions allow us to fix a certain number of arguments of a function and generate a new function.
+
+from functools import partial
+
+# A normal function
+def f(a, b, c, x):
+	return 1000*a + 100*b + 10*c + x
+
+# A partial function that calls f with
+# a as 3, b as 1 and c as 4.
+g = partial(f, 3, 1, 4)
+
+# Calling g()
+print(g(5))
+
+
+OP : 3145
+
+
+from functools import *
+
+# A normal function
+def add(a, b, c):
+	return 100 * a + 10 * b + c
+
+# A partial function with b = 1 and c = 2
+add_part = partial(add, c = 2, b = 1)
+
+# Calling partial function
+print(add_part(3))
+
+
+OP : 312
 
 
