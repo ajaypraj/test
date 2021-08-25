@@ -477,3 +477,14 @@ and d1.d_name= d2.d_name
 and d1.branch = d2.branch )
 
 
+=============
+how to insert multiple rows in table 
+insert into project(name, start_date,end_date) values ('abc','12-11-2020','12-12-2020'),('pqr','01-01-2021','02-02-2021');
+
+
+Create Table - By Copying all columns from another table
+CREATE TABLE new_table
+  AS (SELECT * FROM old_table);
+
+How can I create a SQL table from another table without copying any values from the old table?
+CREATE TABLE foo LIKE bar;
