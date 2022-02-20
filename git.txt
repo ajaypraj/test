@@ -209,3 +209,18 @@ Date:   Mon Jun 22 15:17:12 2020 +0530
 
 git revert a84148f784f8779190fb0f8bd398b1aafd0c37e4
 by this command only the content which has been added in 'a84148f784f8779190fb0f8bd398b1aafd0c37e4' this commit , will remove.
+===============
+while working on one branch if you want to switch to another branch by saving current branch work then use git stash
+git stash save "<save message>" // it will save you recently done work to stash point
+git stash list // you can view your stash point here
+git stash pop // you can come back to your stash point by this 
+
+after doing git stash save command all recently done changes will disappear
+for using stashing feature you data should be in unstgged state or stagged state only 
+if your changes are already in commited state then you will not be able to use stashing feature
+
+==================
+how to undo a local commit
+
+git reset --soft HEAD^     # Use --soft if you want to keep your changes
+git reset --hard HEAD^     # Use --hard if you don't care about keeping the changes you made
