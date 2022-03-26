@@ -224,3 +224,9 @@ how to undo a local commit
 
 git reset --soft HEAD^     # Use --soft if you want to keep your changes
 git reset --hard HEAD^     # Use --hard if you don't care about keeping the changes you made
+
+=============
+how to set head to specific commit
+
+git revert --no-commit 247a3e00c611ee42045a8494db24cdca1aa6edae..HEAD
+git commit
