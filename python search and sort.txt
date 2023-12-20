@@ -852,6 +852,7 @@ def person_kwargs(name , **data):
 person_kwargs("vijay"  , company="tcs" , hometown="bhandup" , phone=9588756746)
 
 ======================
+https://www.geeksforgeeks.org/__name__-a-special-variable-in-python/
 case1) if you are printing __name__ in current program then it will print as "__main__"
 
 case2) in one program you are  printing __name__ and importing that program into another program then over there instead of printing "__main__" it will print the name of program which was imported
