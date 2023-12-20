@@ -1773,7 +1773,8 @@ In pass-by-reference, the function receives reference to the argument objects pa
 you pass reference of parameters to your function.if any changes made to those parameters inside function those changes are get reflected back to your actual parameters.
 In Python Neither of these two concepts are applicable, rather the values are sent to functions by means of object reference.
 Pass-by-object-reference:
-In Python, (almost) everything is an object. What we commonly refer to as “variables” in Python are more properly called names. Likewise, “assignment” is really the binding of a name to an object. Each binding has a scope that defines its visibility, usually the block in which the name originates.
+In Python, (almost) everything is an object. What we commonly refer to as “variables” in Python are more properly 
+called names. Likewise, “assignment” is really the binding of a name to an object. Each binding has a scope that defines its visibility, usually the block in which the name originates.
 In Python,Values are passed to function by object reference.
 if object is immutable(not modifiable) than the modified value is not available outside the function.
 if object is mutable (modifiable) than modified value is available outside the function.
@@ -2356,7 +2357,8 @@ OP: [1, 2, 3, 4]
 =============
 what is advantage of generators
 
-Memory is saved as the items are produced when required, unlike normal Python functions. This fact becomes very important when you need to create a huge number of iterators
+Memory is saved as the items are produced when required, unlike normal Python functions. This fact becomes very 
+important when you need to create a huge number of iterators
 
 ===========
 what is partial functions
