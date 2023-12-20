@@ -4,7 +4,7 @@ paramiko, paramiko_expect ,pytest, csv, json, shutil,  logging, itertools, funct
 difference between a+, r+ and w+ in file handling python
 r+ Opens a file for both reading and writing. The file pointer placed at the beginning of the file for reading and for writing pointer is placed at end of file. 
 w+ Opens a file for both writing and reading. Overwrites the existing file if the file exists.if file exists already then existing data is flushed out.
-a+ Open for reading and appending (writing at end of file). The file is created if it does not exist. The initial file position for reading is at the beginning of the file, but output is appended to the end of the file
+a+ Open for reading and appending (writing at end of file). The file is created if it does not exist. The initial file position for reading is at the beginning of the file, but output is appended to the end of the file. need to use method f.seek(0) in order to move the seek pointer to zeroth position in order to read data from first line
 
 =================
 
