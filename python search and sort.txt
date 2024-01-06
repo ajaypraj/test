@@ -2107,6 +2107,7 @@ $ source virtualenv_name/bin/activate
 
 ===========
 memory manaement in python 
+https://www.squash.io/how-to-manage-memory-with-python/#:~:text=In%20Python%2C%20memory%20management%20is,are%20no%20longer%20in%20use.
 
 name variables ( reference variables) gets memory in stack space
 x=10
