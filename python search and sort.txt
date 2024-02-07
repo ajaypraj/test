@@ -2397,5 +2397,252 @@ print(add_part(3))
 
 
 OP : 312
+========================
+Implement singly linked list with traverse and  remove_nth_node_from_left function :
 
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+
+class list:
+    def __init__(self):
+        self.head=None
+    def insert_first_node(self,data):
+        tmp=node(data)
+        self.head=tmp
+    def traverse(self):
+        tmp=self.head
+        while tmp is not None:
+            print(tmp.data)
+            tmp=tmp.next
+    def insert_after(self,data,k):
+        tmp=self.head
+        n=node(data)
+        while tmp is not None:
+            if tmp.data == k:
+                break
+            else:
+                tmp=tmp.next
+        n.next=tmp.next
+        tmp.next=n
+
+    def insert_before(self,data,k):
+        prev=self.head
+        tmp=self.head
+        n=node(data)
+        while tmp is not None:
+            if tmp.data ==  k:
+                break
+            else:
+                prev=tmp
+                tmp=tmp.next
+        if (prev == tmp) and (tmp == self.head):
+            n.next=self.head
+            self.head = n
+        else:
+            prev.next=n
+            n.next=tmp
+
+    def insert_at_end(self,data):
+        n=node(data)
+        tmp=self.head
+        while tmp.next is not None:
+            tmp=tmp.next
+        tmp.next=n
+
+    def insert_at_start(self,data):
+        n=node(data)
+        n.next=self.head
+        self.head=n
+
+    def remove(self,data):
+        prev = self.head
+        tmp= self.head
+        while tmp is not None:
+            if tmp.data == data:
+                break
+            else:
+                prev=tmp
+                tmp=tmp.next
+        print("prev is {} tmp is {}".format(prev.data,tmp.data))
+        if prev == tmp == self.head:
+            self.head = self.head.next
+        else:
+            prev.next=tmp.next
+
+    def remove_nth_node_from_end(self,n):
+        first=self.head
+        second=self.head
+        for i in range(1,n+1):
+            first = first.next
+        if first is  None:
+            self.head = self.head.next
+            return
+        while first.next is not None:
+            first=first.next
+            second=second.next
+        tmp=second.next
+        second.next = tmp.next
+
+    def reverse(self):
+        if self.head == None:
+            print("list is empty ")
+        prev = None
+        forw = None
+        curr = self.head
+        while curr is not None:
+            forw = curr.next
+            curr.next = prev
+            prev = curr
+            curr = forw
+        self.head = prev
+l=list()
+l.insert_first_node(1)
+l.insert_after(2,1)
+l.insert_after(4,2)
+l.insert_before(3,4)
+l.insert_at_end(5)
+l.insert_at_end(6)
+#l.insert_at_end(7)
+#l.insert_at_end(8)
+#l.remove_nth_node_from_left(8)
+#l.remove_nth_node_from_left(2)
+#print("old list is ")
+#l.traverse()
+#print("removing item {}".format(4))
+#l.remove(4)
+#print("removing item{}".format(0.5))
+#l.remove(0.5)
+print("currnt list is ")
+l.traverse()
+l.reverse()
+print("list after reversal is ")
+l.traverse()
+
+==========================
+find middle element of linked list 
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+
+class list:
+    def __init__(self):
+        self.head=None
+
+    def insert_first_node(self,data):
+        tmp=node(data)
+        self.head=tmp
+    def traverse(self):
+        tmp=self.head
+        while tmp is not None:
+            print(tmp.data)
+            tmp=tmp.next
+    def insert_after(self,data,k):
+        tmp=self.head
+        n=node(data)
+        while tmp is not None:
+            if tmp.data == k:
+                break
+            else:
+                tmp=tmp.next
+        n.next=tmp.next
+        tmp.next=n
+
+    def find_middle(self):
+        count=0
+        tmp=self.head
+        while tmp is not None:
+            tmp=tmp.next
+            count+=1
+        c=0
+        tmp=self.head
+        while c < count//2:
+            tmp=tmp.next
+            c+=1
+        print("middle is {}".format(tmp.data))
+
+    def find_middle_1_traversal(self):
+        count=0
+        middle=self.head
+        temp=self.head
+        while temp.next is not None:
+            if count%2 == 0:
+                middle = middle.next
+            temp = temp.next
+            count+=1
+        print("middle is {}".format(middle.data))
+
+l=list()
+l.insert_first_node(1)
+l.insert_after(2,1)
+l.insert_after(3,2)
+l.insert_after(4,3)
+l.traverse()
+l.find_middle()
+l.find_middle_1_traversal()
+==============
+you are given 2 linked list find out common elemets from that list :
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.next= None
+
+class list:
+    def __init__(self):
+        self.head=None
+
+    def insert_first_node(self,data):
+        tmp=node(data)
+        self.head=tmp
+    def traverse(self):
+        tmp=self.head
+        while tmp is not None:
+            print(tmp.data)
+            tmp=tmp.next
+    def insert_after(self,data,k):
+        tmp=self.head
+        n=node(data)
+        while tmp is not None:
+            if tmp.data == k:
+                break
+            else:
+                tmp=tmp.next
+        n.next=tmp.next
+        tmp.next=n
+
+    def check_common(self,l1,l2):
+        print("inside check common")
+        head1=l1.head
+        head2 = l2.head
+        while head1 is not None:
+            head2 = l2.head
+            while head2 is not None:
+                #print("head1 {} head2 {}".format(head1.data, head2.data))
+                if head1.data == head2.data:
+                    print(head1.data)
+                head2 = head2.next
+            head1 = head1.next
+
+        print("None")
+
+l1=list()
+l1.insert_first_node(2)
+l1.insert_after(9,2)
+l1.insert_after(13,9)
+l1.insert_after(20,13)
+l1.insert_after(22,20)
+l1.insert_after(27,22)
+l2= list()
+l2.insert_first_node(2)
+l2.insert_after(4,2)
+l2.insert_after(9,4)
+l2.insert_after(20,9)
+l2.insert_after(27,20)
+print("l1 is ")
+l1.traverse()
+print("l2 is ")
+l2.traverse()
+l1.check_common(l1,l2)
 
