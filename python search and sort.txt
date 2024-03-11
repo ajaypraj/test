@@ -1990,6 +1990,45 @@ with open('person.txt', 'w') as json_file:
   json.dump(person_dict, json_file)
   
 ===================
+https://medium.com/@KaranDahiya2000/modify-json-fields-using-python-1b2d88d16908
+
+how to manipulate data in json file :
+before file : {
+  "abc": {
+      "def": 0,
+      "ghi": 1
+  },
+  "jkl": 2
+}
+
+after file : 
+{
+    "ghi": 1,
+    "pqr": {
+        "def": 0,
+        "mno": 3
+    }
+}
+
+import json
+
+with open('data.json') as f:
+    data = json.load(f)
+    data['abc']['mno']= 3
+    field = data['abc']['ghi']
+    data['ghi'] = field
+    data['abc'].pop('ghi')
+    data.pop('jkl')
+    field = data['abc']
+    data.pop('abc')
+    data['pqr'] = field
+    new = json.dumps(data, indent=4)
+
+with open('new.json','w') as f:
+    f.write(new)
+
+#print(data)
+==================
 
 CSV Module
 
@@ -2694,3 +2733,216 @@ def display_info(a, b):
 
 display_info('b', 'a')
 display_info(10, 30)
+==================
+how to sort the dictionary with its values 
+
+footballers_goals = {'Eusebio': 120, 'Cruyff': 104, 'Pele': 150, 'Ronaldo': 132, 'Messi': 125}
+
+temp = dict(sorted(footballers_goals.items() , key=lambda x : x[1])) # sorted by value
+
+print(temp)
+#{'Cruyff': 104, 'Eusebio': 120, 'Messi': 125, 'Ronaldo': 132, 'Pele': 150}
+
+
+temp = dict(sorted(footballers_goals.items() , key=lambda x : x[0])) # sorted by key
+
+print(temp)
+#{'Cruyff': 104, 'Eusebio': 120, 'Messi': 125, 'Pele': 150, 'Ronaldo': 132}
+
+======================
+Move 0's to end of the list without creating a new list or any inbuilt function
+a= [1, 2, 3, 0, 0, 0, 0, 0, 0, 4, 5, 6, 0, 0, 0, 0, 0,9, 8, 7,0,10,11]
+
+
+def test(a):
+    ind=0
+    for i in range(len(a)):
+        if a[i] !=0:
+            a[ind] , a[i] = a[i], a[ind]
+            ind +=1
+    print(a)
+
+a= [1, 2, 3, 0, 0, 0, 0, 0, 0, 4, 5, 6, 0, 0, 0, 0, 0,9, 8, 7,0,10,11]
+test(a)
+========
+Given an array of elements , having some non zero and some zero elements.wirte a program to move all the zeros to end of the array by maintaining 
+sequence of nonzero intact
+
+def test(n):
+    l=len(n)
+    x=[0]*l
+    j=0
+    for i,p in enumerate(n):
+        if p != 0:
+            x[j] = p
+            j+=1
+    print(x)
+
+test([0.1,1,1.1,0,2,0,3,4,0,0,5])
+
+OP:
+[0.1, 1, 1.1, 2, 3, 4, 5, 0, 0, 0, 0]
+
+=====================
+Given a matrix of n X n. The task is to calculate the absolute difference between the sums of its diagonal.
+
+Input : mat[][] = 11 2 4
+                   4 5 6
+                  10 8 -12 
+Output : 15
+Sum of primary diagonal = 11 + 5 + (-12) = 4.
+Sum of secondary diagonal = 4 + 5 + 10 = 19.
+Difference = |19 - 4| = 15.
+
+
+Input : mat[][] = 10 2
+                   4 5
+Output : 9
+
+
+CODE : 
+def test(m,n):
+    d1=0
+    d2=0
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                d1+=m[i][j]
+            if i == n - j -1 :
+                d2+=m[i][j]
+    print("diff is ",abs(d1-d2))
+
+
+
+matrix = [[11,2,4], [4,5,6], [10,8,-12]]
+test(matrix, 3)
+
+================
+
+concurrent programming :
+https://www.youtube.com/watch?v=y85G7GLYhYA&list=PLyb_C2HpOQSBsygWeCYkJ7wjxXShIql43&index=1
+
+https://github.com/nikhilkumarsingh/concurrent-programming-in-python
+
+import asyncio
+import time
+
+
+async def display_time():
+    start_time = time.time()
+    while True:
+        dur = int(time.time() - start_time)
+        if dur % 3 == 0:
+            print("{} seconds have passed".format(dur))
+        await asyncio.sleep(1)
+
+
+async def print_nums():
+    num = 1
+    while True:
+        print(num)
+        num += 1
+        await asyncio.sleep(0.1)
+
+
+async def main():
+
+    task1 = asyncio.create_task(display_time())
+    task2 = asyncio.create_task(print_nums())
+
+    await asyncio.gather(task1, task2)
+
+
+
+
+# for python 3.7
+asyncio.run(main())
+
+=============
+multiprocessing in python 
+https://www.youtube.com/watch?v=Ju4xkvFm07o&list=PLyb_C2HpOQSDUh4kIJnprJjh5n5Wqsww8&index=1
+
+
+============
+multithreading 
+https://www.youtube.com/watch?v=ZPM8TCz5cd8&list=PLyb_C2HpOQSC-Ncui9S4ncUdaGI2YEhwK&index=1
+
+===========
+===================
+can we add new data in tuple: 
+NO. as tuple is immutable we cant add data in tuple
+
+in list how to add data at zeroth location :
+[2,3,4,5]
+l.insert(0,1)
+[1,2,3,4,5]
+
+=============
+
+how to check whether string contains 'a' letter in it with help of lambda 
+
+square = lambda x : True if 'a' in x else False
+
+print("Check whether a is ther",square("vijy"))
+
+==================
+what would be output 
+s="python"
+
+for i in range(len(s)):
+
+     i = s[i].upper()
+
+print(s,end="")  # python 
+========
+what will be op 
+
+tpl = (1,2,3,[4,10])
+tpl[3][1] = 20
+print(tpl)  # (1, 2, 3, [4, 20])
+=========
+what will be op 
+
+l2 = [1, 2, 3, 4, 5]
+
+l1 = l2
+l1[0] = "string"
+print(l2)  #['string', 2, 3, 4, 5]
+
+
+l2 = [1, 2, 3, 4, 5]
+l1 = l2[:]
+l1[0] = "string"
+print(l2)  #[1, 2, 3, 4, 5]
+
+==============
+Diff between list and tuple 
+https://www.youtube.com/watch?v=rTgjOV0uTV0
+
+======
+when not to use ORM in django 
+When you have complex data that is frequently retrieved via multiple joins and aggregations. Often, writing the SQL by hand will be clearer.
+
+While the Django ORM is powerful, it can sometimes be slower than writing raw SQL queries. This is because the ORM adds an additional layer of abstraction between your code and the database.
+
+
+=========
+polling program 
+
+import os
+import time
+
+PATH=r"C:\Users\Ajay\Downloads\poll"
+try:
+    while True:
+        for file in os.listdir(PATH):
+            print(file)
+            os.remove(os.path.join(PATH, file))
+        time.sleep(5)
+except KeyboardInterrupt:
+    print("Quitting the program.")
+
+========
+re.match() checks for a match only at the beginning of the string
+re.search() checks for a match anywhere in the string
+
