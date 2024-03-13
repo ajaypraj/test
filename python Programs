@@ -36,6 +36,33 @@ else:
 
 	
 strings are anagram
+ without using any library with O(n) time complexity solve anargam strings problem :
+def test(s1,s2):
+    l1=list(s1)
+    l2=list(s2)
+    char_count= {}
+    for char in l1:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+
+    for char in l2:
+        if char not in char_count:
+            print("strings are not anagram")
+            break
+        char_count[char] -= 1
+    else:
+        for value in char_count.values():
+            if value != 0:
+                print('strings are not anagram ')
+                break
+        else:
+            print("strings are anagram")
+
+test("silent",'listen')
+OP : 
+strings are anagram
 
 ====================
 
