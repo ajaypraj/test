@@ -63,9 +63,46 @@ def test(s1,s2):
 test("silent",'listen')
 OP : 
 strings are anagram
-
 ====================
+Given two strings in lowercase, the task is to make them Anagram. 
+The only allowed operation is to remove a character from any string.
+Find minimum number of characters to be deleted to make both the strings anagram?
+If two strings contains same data set in any order then strings are called Anagrams. 
 
+Input : str1 = "bcadeh" str2 = "hea"
+Output: 3
+We need to remove b, c and d from str1.
+
+Input : str1 = "cddgk" str2 = "gcd"
+Output: 2
+
+Input : str1 = "bca" str2 = "acb"
+Output: 0
+
+from collections import Counter
+
+def removeChars(str1, str2):
+    d1=dict(Counter(str1))
+    d2=dict(Counter(str2))
+
+    k1=d1.keys()
+    k2=d2.keys()
+
+    count1= len(k1)
+    count2= len(k2)
+
+    common = len(set(k1).intersection(set(k2)))
+
+    if common == 0:
+        print("op is ",count1+count2)
+    else:
+        print("op is",max(count1,count2)-common)
+
+removeChars('abcdef','abc')
+OP :
+op is 3
+
+========
 Program to find first repetitive character in string/list
 
 def test(l):
